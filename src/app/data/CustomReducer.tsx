@@ -5,12 +5,7 @@ export enum Types {
     REMOVE = "REMOVE"
 };
 
-type BaseAction = {
-    type: Types;
-    payload: {};
-};
-
-type SetAction = BaseAction & {
+type SetAction = {
     type: Types.SET;
     payload: {
         key:string;
@@ -18,7 +13,7 @@ type SetAction = BaseAction & {
     };
 }
 
-type RemoveAction = BaseAction & {
+type RemoveAction = {
     type: Types.REMOVE;
     payload: {
         key: string;
@@ -27,21 +22,25 @@ type RemoveAction = BaseAction & {
 
 type Actions = SetAction | RemoveAction;
 
-export type State = Object;
+export type State = {
+    data: Object;
+};
+
+const defaultState: State = {
+    data: {},
+};
 
 const reducer = (draft: State, action: Actions) => {
     switch (action.type) {
         case Types.SET:
-            draft[action.payload.key] = action.payload.value;
+            draft.data[action.payload.key] = action.payload.value;
             break;
         case Types.REMOVE:
-            delete draft[action.payload.key];
+            delete draft.data[action.payload.key];
             break;
         default:
             break;
     }
 };
-
-const defaultState: State = {};
 
 export const useActions = (initialState?: State) => useImmerReducer(reducer, initialState ?? defaultState);

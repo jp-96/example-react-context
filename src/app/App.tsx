@@ -22,10 +22,10 @@ function App() {
           Learn React
         </a>
         <p style={{textAlign:"left", width: "600px"}}>
-          <button onClick={() => set("keyA", (state["keyA"] ?? "") + "+")}>設定</button><button onClick={() => remove("keyA")}>削除</button> keyA:{state["keyA"] ?? "(undefined)"} <br/>
-          <button onClick={() => set("keyB", (state["keyB"] ?? "") + "+")}>設定</button><button onClick={() => remove("keyB")}>削除</button> keyB:{state["keyB"] ?? "(undefined)"} <br/>
-          <button onClick={() => set("keyC", (state["keyC"] ?? "") + "+")}>設定</button><button onClick={() => remove("keyC")}>削除</button> keyC:{state["keyC"] ?? "(undefined)"} <br/>
-          <button onClick={() => set("keyD", (state["keyD"] ?? "") + "+")}>設定</button><button onClick={() => remove("keyD")}>削除</button> keyD:{state["keyD"] ?? "(undefined)"} <br/>
+          <button onClick={() => set("keyA", (state.data["keyA"] ?? "") + "+")}>設定</button><button onClick={() => remove("keyA")}>削除</button> keyA:{state.data["keyA"] ?? "(undefined)"} <br/>
+          <button onClick={() => set("keyB", (state.data["keyB"] ?? "") + "+")}>設定</button><button onClick={() => remove("keyB")}>削除</button> keyB:{state.data["keyB"] ?? "(undefined)"} <br/>
+          <button onClick={() => set("keyC", (state.data["keyC"] ?? "") + "+")}>設定</button><button onClick={() => remove("keyC")}>削除</button> keyC:{state.data["keyC"] ?? "(undefined)"} <br/>
+          <button onClick={() => set("keyD", (state.data["keyD"] ?? "") + "+")}>設定</button><button onClick={() => remove("keyD")}>削除</button> keyD:{state.data["keyD"] ?? "(undefined)"} <br/>
         </p>
       </header>
     </div>

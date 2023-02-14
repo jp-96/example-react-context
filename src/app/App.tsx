@@ -21,21 +21,12 @@ function App() {
         >
           Learn React
         </a>
-        <p>
-          <button onClick={() => set("keyA", (state["keyA"] ?? "ValueA ") + "+")}>設定1</button>
-          <button onClick={() => set("keyB", (state["keyB"] ?? "ValueB ") + "+")}>設定2</button>
-          <button onClick={() => set("keyC", (state["keyC"] ?? "ValueC ") + "+")}>設定3</button>
-          <button onClick={() => set("keyD", (state["keyD"] ?? "ValueD ") + "+")}>設定4</button>
+        <p style={{textAlign:"left", width: "600px"}}>
+          <button onClick={() => set("keyA", (state["keyA"] ?? "") + "+")}>設定</button><button onClick={() => remove("keyA")}>削除</button> keyA:{state["keyA"] ?? "(undefined)"} <br/>
+          <button onClick={() => set("keyB", (state["keyB"] ?? "") + "+")}>設定</button><button onClick={() => remove("keyB")}>削除</button> keyB:{state["keyB"] ?? "(undefined)"} <br/>
+          <button onClick={() => set("keyC", (state["keyC"] ?? "") + "+")}>設定</button><button onClick={() => remove("keyC")}>削除</button> keyC:{state["keyC"] ?? "(undefined)"} <br/>
+          <button onClick={() => set("keyD", (state["keyD"] ?? "") + "+")}>設定</button><button onClick={() => remove("keyD")}>削除</button> keyD:{state["keyD"] ?? "(undefined)"} <br/>
         </p>
-        <p>
-          <button onClick={() => remove("keyA")}>削除1</button>
-          <button onClick={() => remove("keyB")}>削除2</button>
-          <button onClick={() => remove("keyC")}>削除3</button>
-          <button onClick={() => remove("keyD")}>削除4</button>
-        </p>
-        <pre>
-          {JSON.stringify(state,null,4)}
-        </pre>
       </header>
     </div>
   );

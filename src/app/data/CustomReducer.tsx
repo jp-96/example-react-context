@@ -1,6 +1,7 @@
 import { useImmerReducer } from "use-immer";    // yarn add --dev use-immer
 
 export type CustomState = Object;
+const defaultCustomState: CustomState = {};
 
 export enum ActionType {
     SET = "SET",
@@ -42,4 +43,4 @@ const reducer = (draft: CustomState, action: CustomAction) => {
     }
 };
 
-export const useCustomReducer = (initialState: CustomState) => useImmerReducer(reducer, initialState);
+export const useCustomReducer = (initialState?: CustomState) => useImmerReducer(reducer, initialState ?? defaultCustomState);

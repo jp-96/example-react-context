@@ -9,7 +9,7 @@ if (!rootElement) throw new Error('Missing the root element');
 const root = createRoot(rootElement);
 root.render(
   <StrictMode>
-    <DataProvider>
+    <DataProvider initialState={{keyA: "initialState"}}>
       <App />
     </DataProvider>
   </StrictMode>

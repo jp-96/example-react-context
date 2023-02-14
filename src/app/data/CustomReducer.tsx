@@ -1,20 +1,17 @@
 import { useImmerReducer } from "use-immer";    // yarn add --dev use-immer
 
-export type CustomState = Object;
-const defaultCustomState: CustomState = {};
-
-export enum ActionType {
+export enum Types {
     SET = "SET",
     REMOVE = "REMOVE"
 };
 
 type BaseAction = {
-    type: ActionType;
+    type: Types;
     payload: {};
 };
 
 type SetAction = BaseAction & {
-    type: ActionType.SET;
+    type: Types.SET;
     payload: {
         key:string;
         value:string;
@@ -22,20 +19,22 @@ type SetAction = BaseAction & {
 }
 
 type RemoveAction = BaseAction & {
-    type: ActionType.REMOVE;
+    type: Types.REMOVE;
     payload: {
         key: string;
     }
 }
 
-type CustomAction = SetAction | RemoveAction;
+type Actions = SetAction | RemoveAction;
 
-const reducer = (draft: CustomState, action: CustomAction) => {
+export type State = Object;
+
+const reducer = (draft: State, action: Actions) => {
     switch (action.type) {
-        case ActionType.SET:
+        case Types.SET:
             draft[action.payload.key] = action.payload.value;
             break;
-        case ActionType.REMOVE:
+        case Types.REMOVE:
             delete draft[action.payload.key];
             break;
         default:
@@ -43,4 +42,6 @@ const reducer = (draft: CustomState, action: CustomAction) => {
     }
 };
 
-export const useCustomReducer = (initialState?: CustomState) => useImmerReducer(reducer, initialState ?? defaultCustomState);
+const defaultState: State = {};
+
+export const useActions = (initialState?: State) => useImmerReducer(reducer, initialState ?? defaultState);

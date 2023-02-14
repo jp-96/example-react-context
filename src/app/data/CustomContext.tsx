@@ -1,24 +1,55 @@
-import React, { createContext, useContext } from "react";
-import { CustomHook, useCustomHook } from "./CustomHook";
-import { CustomState } from "./CustomReducer";
+import React, { createContext, ReactNode, useContext } from "react";
+import { State, Types, useActions } from "./CustomReducer";
 
-type Props = {
-    initialState?: CustomState
-    children: any;
+type Value = {
+    state: State,
+    set: (key: string, value: string) => void,
+    remove: (key: string) => void,
 }
 
-const CustomContext = createContext<CustomHook>(
+const useValue = (initialState?: State): Value => {
+    const [state, dispatch] = useActions(initialState);
+    const set = (key: string, value: string) => {
+        dispatch({
+            type: Types.SET,
+            payload: {
+                key,
+                value,
+            },
+        });
+    };
+    const remove = (key: string) => {
+        dispatch({
+            type: Types.REMOVE,
+            payload: {
+                key,
+            },
+        });
+    };
+    return {
+        state,
+        set,
+        remove,
+    };
+}
+
+type Props = {
+    initialState?: State;
+    children?: ReactNode;
+}
+
+const Context = createContext<Value>(
     undefined!
     // If you thought this should be optional, see
     // https://github.com/DefinitelyTyped/DefinitelyTyped/pull/24509#issuecomment-382213106
 ); 
 
-export const useData = () => useContext(CustomContext);
-export default function CustomContextProvider({ initialState, children }: Props) {
-    const customHook = useCustomHook(initialState)
+export const useContextConsumer = () => useContext(Context);
+export default function ContextProvider({ initialState, children }: Props) {
+    const value = useValue(initialState)
     return (
-        <CustomContext.Provider value={customHook}>
+        <Context.Provider value={value}>
             {children}
-        </CustomContext.Provider>
+        </Context.Provider>
     );
 }

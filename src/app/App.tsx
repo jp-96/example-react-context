@@ -1,10 +1,10 @@
 import React from 'react'
 import Logo from './Logo';  // logo.svg ==> Log0.tsx
 //import './App.css'; // ==> ../index.html
-import { useData } from './data/CustomContext';
+import { useContextConsumer } from './data/CustomContext';
 
 function App() {
-  const {state, set, remove} = useData();
+  const {state, set, remove} = useContextConsumer();
 
   return (
     <div className="App">

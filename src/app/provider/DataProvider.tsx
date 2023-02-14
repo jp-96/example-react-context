@@ -31,13 +31,13 @@ const reducer = (draft: DataType, action: Action) => {
     }
 };
 
-type DataContextType = {
+type CustomContextHookType = {
     data: DataType,
     set: (key: string, value: string) => void,
     remove: (key: string) => void,
 }
 
-const useDataContext = () => {
+const useCustomContextHook = () => {
     const [data, dispatch] = useImmerReducer(reducer, initialData);
     const set = (key: string, value: string) => {
         dispatch({
@@ -51,29 +51,27 @@ const useDataContext = () => {
             key,
         });
     };
-    const providerValue: DataContextType ={
+    const value: CustomContextHookType ={
         data,
         set,
         remove,
     };
-    return providerValue;
+    return value;
 }
 
-const defaultValue: DataContextType = {
+const initialCustomContextHook: CustomContextHookType = {
     data: initialData,
     set: (key: string, value: string) => undefined,
     remove: (key: string) => undefined,
 }
 
-const DataContext = createContext(defaultValue);
-
-export const useData = () => useContext(DataContext);
-
-export default function DataProvider({ children }) {
-    const providerValue = useDataContext()
+const CustomContext = createContext(initialCustomContextHook);
+export const useData = () => useContext(CustomContext);
+export default function CustomContextProvider({ children }) {
+    const providerValue = useCustomContextHook()
     return (
-        <DataContext.Provider value={providerValue}>
+        <CustomContext.Provider value={providerValue}>
             {children}
-        </DataContext.Provider>
+        </CustomContext.Provider>
     );
 }

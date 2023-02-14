@@ -1,46 +1,58 @@
 import { useImmerReducer } from "use-immer";    // yarn add --dev use-immer
 
-export type CustomState = Object;
-const defaultCustomState: CustomState = {};
-
-export enum ActionType {
+export enum Types {
     SET = "SET",
-    REMOVE = "REMOVE"
+    REMOVE = "REMOVE",
+    ADD = "ADD",
 };
 
-type BaseAction = {
-    type: ActionType;
-    payload: {};
-};
-
-type SetAction = BaseAction & {
-    type: ActionType.SET;
+type SetAction = {
+    type: Types.SET;
     payload: {
         key:string;
         value:string;
     };
 }
 
-type RemoveAction = BaseAction & {
-    type: ActionType.REMOVE;
+type RemoveAction = {
+    type: Types.REMOVE;
     payload: {
         key: string;
     }
 }
 
-type CustomAction = SetAction | RemoveAction;
+type AddAction = {
+    type: Types.ADD;
+    payload: {
+        key:string;
+        char:string;
+    };
+}
 
-const reducer = (draft: CustomState, action: CustomAction) => {
+type Actions = SetAction | RemoveAction | AddAction;
+
+export type State = {
+    data: Object;
+};
+
+const defaultState: State = {
+    data: {},
+};
+
+const reducer = (draft: State, action: Actions) => {
     switch (action.type) {
-        case ActionType.SET:
-            draft[action.payload.key] = action.payload.value;
+        case Types.SET:
+            draft.data[action.payload.key] = action.payload.value;
             break;
-        case ActionType.REMOVE:
-            delete draft[action.payload.key];
+        case Types.REMOVE:
+            delete draft.data[action.payload.key];
+            break;
+        case Types.ADD:
+            draft.data[action.payload.key] = (draft.data[action.payload.key] ?? "") + action.payload.char;
             break;
         default:
             break;
     }
 };
 
-export const useCustomReducer = (initialState?: CustomState) => useImmerReducer(reducer, initialState ?? defaultCustomState);
+export const useActions = (initialState?: State) => useImmerReducer(reducer, initialState ?? defaultState);

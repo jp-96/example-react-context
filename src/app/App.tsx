@@ -4,7 +4,7 @@ import Logo from './Logo';  // logo.svg ==> Log0.tsx
 import { useData } from './provider/DataContext';
 
 function App() {
-  const {data, set, remove} = useData();
+  const {state, set, remove} = useData();
 
   return (
     <div className="App">
@@ -22,10 +22,10 @@ function App() {
           Learn React
         </a>
         <p>
-          <button onClick={() => set("keyA", (data["keyA"] ?? "ValueA ") + "+")}>設定1</button>
-          <button onClick={() => set("keyB", (data["keyB"] ?? "ValueB ") + "+")}>設定2</button>
-          <button onClick={() => set("keyC", (data["keyC"] ?? "ValueC ") + "+")}>設定3</button>
-          <button onClick={() => set("keyD", (data["keyD"] ?? "ValueD ") + "+")}>設定4</button>
+          <button onClick={() => set("keyA", (state["keyA"] ?? "ValueA ") + "+")}>設定1</button>
+          <button onClick={() => set("keyB", (state["keyB"] ?? "ValueB ") + "+")}>設定2</button>
+          <button onClick={() => set("keyC", (state["keyC"] ?? "ValueC ") + "+")}>設定3</button>
+          <button onClick={() => set("keyD", (state["keyD"] ?? "ValueD ") + "+")}>設定4</button>
         </p>
         <p>
           <button onClick={() => remove("keyA")}>削除1</button>
@@ -34,7 +34,7 @@ function App() {
           <button onClick={() => remove("keyD")}>削除4</button>
         </p>
         <pre>
-          {JSON.stringify(data,null,4)}
+          {JSON.stringify(state,null,4)}
         </pre>
       </header>
     </div>

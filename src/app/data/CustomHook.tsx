@@ -1,4 +1,4 @@
-import { CustomState, ActionType, useCustomReducer } from "./DataReducer";
+import { CustomState, ActionType, useCustomReducer } from "./CustomReducer";
 
 const initialState: CustomState = {};
 

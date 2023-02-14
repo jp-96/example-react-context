@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react";
-import { CustomHook, useCustomHook } from "./DataHook";
+import { CustomHook, useCustomHook } from "./CustomHook";
 
 const CustomContext = createContext<CustomHook>(undefined!); // If you thought this should be optional, see https://github.com/DefinitelyTyped/DefinitelyTyped/pull/24509#issuecomment-382213106
 

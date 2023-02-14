@@ -5,6 +5,7 @@ type Value = {
     state: State,
     set: (key: string, value: string) => void,
     remove: (key: string) => void,
+    add: (key: string, char: string) => void,
 }
 
 const useValue = (initialState?: State): Value => {
@@ -26,10 +27,20 @@ const useValue = (initialState?: State): Value => {
             },
         });
     };
+    const add = (key: string, char: string) => {
+        dispatch({
+            type: Types.ADD,
+            payload: {
+                key,
+                char,
+            },
+        });
+    };
     return {
         state,
         set,
         remove,
+        add,
     };
 }
 

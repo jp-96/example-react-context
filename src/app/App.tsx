@@ -1,7 +1,7 @@
 import React from 'react'
 import Logo from './Logo';  // logo.svg ==> Log0.tsx
 //import './App.css'; // ==> ../index.html
-import { useData } from './provider/DataProvider';
+import { useData } from './provider/DataContext';
 
 function App() {
   const {data, set, remove} = useData();

@@ -6,7 +6,7 @@ export type CustomHook = {
     remove: (key: string) => void,
 }
 
-export const useCustomHook = (initialState?: CustomState):CustomHook => {
+export const useCustomHook = (initialState?: CustomState): CustomHook => {
     const [state, dispatch] = useCustomReducer(initialState);
     const set = (key: string, value: string) => {
         dispatch({

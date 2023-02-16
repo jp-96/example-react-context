@@ -1,13 +1,13 @@
 import { useImmerReducer } from "use-immer";    // yarn add --dev use-immer
 
-export enum Types {
-    SET = "SET",
-    REMOVE = "REMOVE",
-    ADD = "ADD",
-};
+export const Types = {
+  SET: "SET",
+  REMOVE: "REMOVE",
+  ADD: "ADD",
+} as const;
 
 type SetAction = {
-    type: Types.SET;
+    type: typeof Types.SET;
     payload: {
         key:string;
         value:string;
@@ -15,14 +15,14 @@ type SetAction = {
 }
 
 type RemoveAction = {
-    type: Types.REMOVE;
+    type: typeof Types.REMOVE;
     payload: {
         key: string;
     }
 }
 
 type AddAction = {
-    type: Types.ADD;
+    type: typeof Types.ADD;
     payload: {
         key:string;
         char:string;
